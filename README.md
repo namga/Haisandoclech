@@ -28,3 +28,10 @@
 - APK filename: `Hai-San-Doc-Lech-v1.0.1-debug.apk`
 
 For the next release, increase `versionCode` by at least 1 and update `versionName` in `android/app/build.gradle`, then update the versioned filename/artifact in `.github/workflows/build-apk.yml`.
+
+
+## Version 1.0.2 — Android status-bar overlap fix
+
+The Android WebView is placed inside a native root container that applies Android system-bar and display-cutout insets before the web content is laid out. This is intended to prevent the website's promotional banner from appearing behind the Android status bar on Android 15+ devices. The GitHub Actions workflow names the debug APK `Hai-San-Doc-Lech-v1.0.2-debug.apk`.
+
+This source change has not been confirmed by a successful device build in this environment. Build it with GitHub Actions, install the resulting APK, and verify on the affected phone. If the same overlap happens when opening the site in Chrome/PWA rather than the APK, a website-side safe-area fix is also required.

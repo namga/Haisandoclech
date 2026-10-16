@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.view.Window;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.FrameLayout;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebChromeClient;
@@ -24,6 +25,12 @@ public class MainActivity extends Activity {
         window.setStatusBarColor(Color.rgb(8, 126, 174));
         window.setNavigationBarColor(Color.rgb(8, 126, 174));
 
+        // Use a native root container to reserve the system-bar safe area.
+        // This is more reliable than applying insets directly to WebView on
+        // Android 15+ (target SDK 35), where edge-to-edge is enforced.
+        FrameLayout root = new FrameLayout(this);
+        root.setBackgroundColor(Color.rgb(8, 126, 174));
+
         webView = new WebView(this);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -31,19 +38,18 @@ public class MainActivity extends Activity {
         settings.setLoadsImagesAutomatically(true);
         settings.setSupportZoom(true);
 
-        // Android 15 / target SDK 35 can lay app content beneath system bars.
-        // Add the actual system-bar insets as WebView padding so the website's
-        // banner/header starts below the status bar instead of being covered.
-        if (android.os.Build.VERSION.SDK_INT >= 35) {
-            webView.setOnApplyWindowInsetsListener((view, insets) -> {
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+            // Android 15 enforces edge-to-edge for apps targeting SDK 35.
+            // Apply insets to the ROOT container and consume them so WebView
+            // doesn't apply the same inset a second time (double padding).
+            window.setDecorFitsSystemWindows(false);
+            root.setOnApplyWindowInsetsListener((view, insets) -> {
                 android.graphics.Insets bars = insets.getInsets(
-                    WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars()
+                    WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout()
                 );
-                view.setPadding(0, bars.top, 0, bars.bottom);
-                return insets;
+                view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+                return WindowInsets.CONSUMED;
             });
-        } else if (android.os.Build.VERSION.SDK_INT >= 30) {
-            window.setDecorFitsSystemWindows(true);
         }
 
         webView.setWebViewClient(new WebViewClient() {
@@ -54,7 +60,11 @@ public class MainActivity extends Activity {
             }
         });
         webView.setWebChromeClient(new WebChromeClient());
-        setContentView(webView);
+        root.addView(webView, new FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        ));
+        setContentView(root);
 
         if (savedInstanceState == null) {
             webView.loadUrl(STORE_URL);
