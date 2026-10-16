@@ -39,9 +39,14 @@ jobs:
           ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
         run: gradle --no-daemon assembleDebug
 
-      - name: Upload debug APK
+      - name: Rename APK with app version
+        run: |
+          mkdir -p dist
+          cp android/app/build/outputs/apk/debug/app-debug.apk dist/Hai-San-Doc-Lech-v1.0.1-debug.apk
+
+      - name: Upload versioned debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: Hai-San-Doc-Lech-debug-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: Hai-San-Doc-Lech-v1.0.1-debug
+          path: dist/Hai-San-Doc-Lech-v1.0.1-debug.apk
           if-no-files-found: error

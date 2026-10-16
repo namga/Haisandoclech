@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.graphics.Color;
 import android.view.Window;
+import android.view.View;
+import android.view.WindowInsets;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebChromeClient;
@@ -28,6 +30,21 @@ public class MainActivity extends Activity {
         settings.setDomStorageEnabled(true);
         settings.setLoadsImagesAutomatically(true);
         settings.setSupportZoom(true);
+
+        // Android 15 / target SDK 35 can lay app content beneath system bars.
+        // Add the actual system-bar insets as WebView padding so the website's
+        // banner/header starts below the status bar instead of being covered.
+        if (android.os.Build.VERSION.SDK_INT >= 35) {
+            webView.setOnApplyWindowInsetsListener((view, insets) -> {
+                android.graphics.Insets bars = insets.getInsets(
+                    WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars()
+                );
+                view.setPadding(0, bars.top, 0, bars.bottom);
+                return insets;
+            });
+        } else if (android.os.Build.VERSION.SDK_INT >= 30) {
+            window.setDecorFitsSystemWindows(true);
+        }
 
         webView.setWebViewClient(new WebViewClient() {
             @Override

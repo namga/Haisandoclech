@@ -19,3 +19,12 @@
 - Cần internet để xem sản phẩm/đặt hàng.
 - Checkout và dữ liệu đơn hàng phụ thuộc hoàn toàn vào website chính thức.
 - APK chưa được ký phát hành (release signing); debug APK dùng thử.
+
+
+## App version
+- `versionCode`: 2
+- `versionName`: 1.0.1
+- GitHub Actions artifact: `Hai-San-Doc-Lech-v1.0.1-debug`
+- APK filename: `Hai-San-Doc-Lech-v1.0.1-debug.apk`
+
+For the next release, increase `versionCode` by at least 1 and update `versionName` in `android/app/build.gradle`, then update the versioned filename/artifact in `.github/workflows/build-apk.yml`.

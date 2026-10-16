@@ -1,0 +1,35 @@
+/* Mobile header spacing fix for Hai San Doc Lech. Add via WordPress Customizer > Additional CSS. */
+@media (max-width: 767px) {
+  html, body { overflow-x: hidden; }
+  #masthead, .site-header, .header-wrapper, .header-main {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    margin-top: 0 !important;
+    padding-top: 12px !important;
+  }
+  .header-banner, .top-banner, .topbar-banner, .header-promo, .promo-banner {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 14px !important;
+    overflow: hidden !important;
+    z-index: 0 !important;
+  }
+  .header-banner img, .top-banner img, .topbar-banner img, .header-promo img, .promo-banner img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 190px !important;
+    object-fit: cover !important;
+  }
+  .site-branding, .site-logo, .header-logo, .custom-logo-link {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    margin-top: 12px !important;
+  }
+}
