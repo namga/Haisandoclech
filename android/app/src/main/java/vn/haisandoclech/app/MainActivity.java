@@ -6,7 +6,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
-import android.view.KeyEvent;
+import android.view.KeyEvent;\nimport android.graphics.Color;\nimport android.view.Window;
 import android.webkit.WebSettings;
 
 public class MainActivity extends Activity {
