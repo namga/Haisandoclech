@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#087eae">
+<meta name="description" content="Hải Sản Dốc Lết — Tươi ngon từ biển cả. Xem sản phẩm và đặt hàng trực tiếp trên website chính thức.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<title>Hải Sản Dốc Lết</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(160deg,#eafaff,#fff 58%);color:#07334b;min-height:100vh}
+main{max-width:720px;margin:auto;padding:28px 20px 40px;text-align:center}
+.logo{width:148px;height:148px;object-fit:cover;border-radius:30px;box-shadow:0 12px 32px #087eae25}
+h1{font-size:clamp(28px,6vw,42px);margin:18px 0 6px;letter-spacing:-.04em}
+p{line-height:1.6;color:#416475}.tag{font-weight:700;color:#087eae}
+.panel{background:#fff;border:1px solid #d7edf5;border-radius:24px;padding:24px;margin-top:26px;box-shadow:0 12px 36px #0a5d7d0d}
+.button{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:54px;border-radius:16px;background:linear-gradient(100deg,#087eae,#00a9ce);color:#fff;text-decoration:none;font-weight:750;margin-top:12px;box-shadow:0 8px 20px #087eae26}
+.secondary{background:#effaff;color:#087eae;border:1px solid #c8eaf5;box-shadow:none}
+small{display:block;color:#638091;margin-top:18px;line-height:1.5}
+</style>
+</head>
+<body><main>
+<img class="logo" src="./icons/icon-192.png" alt="Biểu tượng Hải Sản Dốc Lết">
+<h1>Hải Sản <span class="tag">Dốc Lết</span></h1>
+<p>Tươi ngon từ biển cả</p>
+<section class="panel">
+<h2>Mua hải sản dễ dàng</h2>
+<p>Khám phá sản phẩm, xem giá hiện tại và đặt hàng trên website chính thức. Giỏ hàng và quy trình thanh toán vẫn được xử lý tại cửa hàng để hạn chế sai lệch giá và đơn hàng.</p>
+<a class="button" href="https://haisandoclech.vn/">Xem sản phẩm &amp; đặt hàng</a>
+<a class="button secondary" href="https://haisandoclech.vn/" rel="noopener">Mở cửa hàng chính thức</a>
+<small>Giá, tồn kho, giỏ hàng và xác nhận đơn hàng phụ thuộc dữ liệu trực tiếp từ haisandoclech.vn.</small>
+</section></main>
+<script>
+if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
